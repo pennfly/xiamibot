@@ -1,0 +1,11 @@
+{
+	"token":"794107877:AAHoOXQ-HgulTOk3IudwWRZYYyhyZTdwfxQ",
+	"path":"https://api.telegram.org/bot<TOKEN>/<COMMAND>",
+	"command":{
+		"askBot":"getUpdates",
+		"sendAudio":"sendAudio",
+		"sendMsg":"sendMessage"
+	},
+	"appsleep":3,
+	"xmpath":"https://www.xiami.com/chart/data?c=103&type=0&page=<PAGE>&limit=<LIMIT>"
+}
