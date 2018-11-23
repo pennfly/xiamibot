@@ -13,7 +13,7 @@ class Bot:
     '''
     r = requests.Session()
     u = ''
-    i = 0
+    i = 56825606
     l = 0
 
     def __init__(self, path, token, command):
@@ -67,16 +67,38 @@ class Bot:
         }
         self.r.post(Bot.sendAudioUrl, json = result)
 
+    def sendIdAudio(self,chatId,songId):
+        res = provide.getByListenId(songId)
+        result = {
+            "chat_id":chatId,
+            "audio":res["url"],
+            "caption":'`'+ res["text"] +'`',
+            "parse_mode" : "Markdown"
+        }
+        self.r.post(Bot.sendAudioUrl, json = result)
+        
     def sendChart(self, chatId, page):
-        text = '''
-        * - 今日虾米音乐排行榜 - * 
+        text = '''*今日虾米音乐排行榜*
         联系我 @pennfly
-        `嘿嘿嘿！现在程序还非常脆弱，不停完善中..`
+        默认监听词语  `歌` 发送虾米音乐排行榜
+        默认监听词语  `我要听光年之外` 发送光年之外的搜索列表 
+        `嘿嘿嘿！ 点击下面的条目试试看哦.`
         '''
         result = {
             "chat_id" : chatId,
             "text" : text,
             "reply_markup" : { "inline_keyboard" :  provide.getlist(page) },
             "parse_mode" : "Markdown"
+        }
+        self.r.get(Bot.sendMsgUrl , json = result)
+
+    def sendSeacSong(self, chatId, strSearch):
+        text = '''
+            为你搜索到 点击看下效果怎么样!
+        '''
+        result = {
+            "chat_id" : chatId,
+            "text"  : text,
+            "reply_markup" : { "inline_keyboard" :  provide.searchSong(strSearch) },
         }
         self.r.get(Bot.sendMsgUrl , json = result)
